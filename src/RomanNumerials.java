@@ -4,8 +4,8 @@ public class RomanNumerials {
         int tens = 1000;
         int fives = 500;
 
-        String ten = "M";
-        String five = "D";
+        char ten = 'M';
+        char five = 'D';
 
         int num = 3998;
 
@@ -19,7 +19,8 @@ public class RomanNumerials {
             }
 
             if(num/(tens-(tens/10)) == 1) {
-                answer += getNumerial(tens - (tens / 10));
+                answer += getNumerial(tens / 10);
+                answer += getNumerial(tens) + " ";
                 System.out.println(answer);
                 num-=(num/(tens-(tens/10))) * tens-(tens/10);
             }
@@ -31,7 +32,8 @@ public class RomanNumerials {
             }
 
             if((fives > 0) && num/(fives - (fives/5))  == 1){
-                answer += getNumerial(fives - (tens/10));
+                answer += getNumerial(fives/5);
+                answer += getNumerial(fives) + " ";
                 num-=(num/(fives - (tens/10)))*(fives - (tens/10));
             }
 
@@ -44,61 +46,32 @@ public class RomanNumerials {
         System.out.println(answer);
     }
 
-    static String append(int num, int divisor, String s ){
+    static String append(int num, int divisor, char c ){
         String app = "";
         for(int i = 0;i < (num/divisor); i++)
-            app+=s;
+            app+=c + " ";
         return app;
     }
 
-    static String getNumerial(int check){
+    static char getNumerial(int check){
         String num = "";
         switch (check){
-            case 1: case 4: case 9:
-                num += 'I';
-                break;
+            case 1:
+                return 'I';
             case 5:
-                num += 'V';
-                break;
-            case 10: case 40: case 90:
-                num += 'X';
-                break;
+                return 'V';
+            case 10:
+                return 'X';
             case 50:
-                num += 'L';
-                break;
-            case 100: case 400: case 900:
-                num += 'C';
-                break;
+                return 'L';
+            case 100:
+                return 'C';
             case 500:
-                num += 'D';
-                break;
+                return 'D';
             case 1000:
-                num += 'M';
-                break;
+                return 'M';
         }
-
-        switch (check){
-            case 4:
-                num += 'V';
-                break;
-            case 9:
-                num += 'X';
-                break;
-            case 40:
-                num += 'L';
-                break;
-            case 90:
-                num += 'C';
-                break;
-            case 400:
-                num += 'D';
-                break;
-            case 900:
-                num += 'M';
-                break;
-        }
-
-        return (num + " ");
+        return 'e';
     }
 
 }
